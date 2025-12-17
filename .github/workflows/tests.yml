@@ -27,6 +27,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # --- Início do Ajuste: Node.js e Frontend ---
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm' # Otimiza o tempo de build cacheando as dependências
+
+      - name: Instalar dependências de frontend
+        run: npm ci
+
+      - name: Compilar assets com Vite
+        run: npm run build
+      # --- Fim do Ajuste ---
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
